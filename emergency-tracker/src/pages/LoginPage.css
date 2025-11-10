@@ -1,0 +1,117 @@
+/* Global reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Background (soft dark gradient) */
+.login-page {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1e1e2f, #2a2a40);
+  font-family: "Poppins", sans-serif;
+}
+
+/* Login card */
+.login-card {
+  background: rgba(255, 255, 255, 0.98);
+  padding: 2.5rem 2rem;
+  border-radius: 1.2rem;
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.25);
+  width: 90%;
+  max-width: 360px;
+  text-align: center;
+  animation: fadeIn 0.6s ease;
+}
+
+/* Heading */
+.login-card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.3rem;
+  color: #222;
+}
+
+/* Subtitle */
+.subtitle {
+  color: #666;
+  font-size: 0.95rem;
+  margin-bottom: 1.8rem;
+}
+
+/* Input wrapper */
+.input-group {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.2rem;
+}
+
+/* Input icon */
+.input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  opacity: 0.7;
+}
+
+/* Input fields */
+.input-group input {
+  width: 100%;
+  padding: 0.8rem 0.8rem 0.8rem 2.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.6rem;
+  font-size: 1rem;
+  background: #fff;
+  transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+  border-color: #ff4b4b;
+  outline: none;
+  box-shadow: 0 0 6px rgba(255, 75, 75, 0.4);
+}
+
+/* Button */
+.login-card button {
+  width: 100%;
+  padding: 0.9rem;
+  margin-top: 0.8rem;
+  background: linear-gradient(135deg, #ff4b4b, #ff7575);
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.login-card button:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 15px rgba(255, 75, 75, 0.3);
+}
+
+/* Error message */
+.error {
+  margin-top: 1rem;
+  color: #d90429;
+  font-weight: 500;
+  background: rgba(255, 0, 0, 0.08);
+  padding: 0.5rem;
+  border-radius: 0.4rem;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

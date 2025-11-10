@@ -1,0 +1,58 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs
+*.log
+logs/*.log
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Build output
+dist/
+build/
+coverage/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE/editor settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Runtime data
+*.sqlite
+*.db
+*.db-journal
+
+# Optional: If using Docker
+docker-compose.override.yml
+.dockerignore
+
+# Optional: If using test coverage tools
+coverage/
+.nyc_output/
+
+# Optional: If using TypeScript
+*.tsbuildinfo
+
+# Optional: If using uploads folder for user files
+uploads/

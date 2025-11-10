@@ -1,0 +1,375 @@
+/* === Base === */
+body {
+  font-family: "Poppins", sans-serif;
+  background: #f5f7fb;
+  color: #1e1e1e;
+  margin: 0;
+  padding: 0;
+}
+
+/* === Dashboard Container === */
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* === Header === */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #0a2e57, #103d73);
+  color: #fff;
+  padding: 18px 32px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.dashboard-header h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: 0.5px;
+}
+
+.logout-btn {
+  background: #ff4b4b;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: #d93c3c;
+  transform: scale(1.03);
+}
+
+/* === Distress Cards Container === */
+.distress-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  padding: 30px;
+  justify-items: center;
+  background: #f5f7fb;
+}
+
+/* === Distress Card === */
+.distress-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 280px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border-top: 4px solid #1877f2;
+}
+
+.distress-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+}
+
+.distress-card h3 {
+  font-size: 1.05rem;
+  color: #0a2e57;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.distress-card p {
+  font-size: 0.9rem;
+  margin: 6px 0;
+  color: #333;
+}
+
+/* === Empty State === */
+.distress-cards-container:empty::after {
+  content: "No distress signals detected 🚫";
+  color: #777;
+  font-size: 1rem;
+  padding: 60px;
+  text-align: center;
+}
+
+/* === Distress Modal === */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.6); /* Dark blur overlay */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  animation: fadeInOverlay 0.3s ease;
+}
+
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 25px 30px;
+  width: 420px;
+  max-width: 90%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.3s ease;
+  color: #1e293b;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-content h2 {
+  text-align: center;
+  color: #0a2e57;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.modal-content p {
+  font-size: 0.95rem;
+  margin: 8px 0;
+  color: #334155;
+  line-height: 1.4;
+}
+
+.modal-content b {
+  color: #0a2e57;
+}
+
+.modal-content div {
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px 0;
+  border-left: 4px solid #1877f2;
+}
+
+/* Buttons */
+.modal-content button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+}
+
+.modal-content button:first-of-type {
+  background: #1877f2;
+  color: white;
+}
+
+.modal-content button:first-of-type:hover {
+  background: #125ecb;
+}
+
+.modal-content button:last-of-type {
+  background: #e2e8f0;
+  color: #1e293b;
+}
+
+.modal-content button:last-of-type:hover {
+  background: #cbd5e1;
+}
+
+/* === Status-Based Modal Colors (matching card colors) === */
+
+.modal-content[data-status="Pending"] {
+  border-top: 5px solid #ff0026; /* red */
+  background: #ffe9ee; /* light pink-red background */
+  box-shadow: 0 8px 18px rgba(255, 0, 38, 0.25);
+}
+
+.modal-content[data-status="Working"] {
+  border-top: 5px solid #f5a623; /* orange */
+  background: #fff9ed; /* light yellow */
+  box-shadow: 0 8px 18px rgba(245, 166, 35, 0.25);
+}
+
+.modal-content[data-status="Closed"] {
+  border-top: 5px solid #28a745; /* green */
+  background: #f6fffa; /* soft green */
+  box-shadow: 0 8px 18px rgba(40, 167, 69, 0.25);
+}
+
+
+/* === Path Section === */
+.path-title {
+  font-weight: 600;
+  color: #333;
+  margin-top: 18px;
+  font-size: 1rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 6px;
+}
+
+.path-item {
+  background: #f1f4fb;
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin: 6px 0;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  color: #444;
+}
+
+.node-id {
+  font-weight: 600;
+  color: #1877f2;
+}
+
+/* === Modal Buttons === */
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 22px;
+  gap: 10px;
+}
+
+.map-btn {
+  flex: 1;
+  background: #1877f2;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.map-btn:hover {
+  background: #0f5fc1;
+}
+
+.close-btn {
+  flex: 1;
+  background: #e9ecef;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  color: #333;
+  transition: 0.2s;
+}
+
+.close-btn:hover {
+  background: #d9dee2;
+}
+
+/* === Animations === */
+@keyframes fadeIn {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* === Filters === */
+.filters {
+  display: flex;
+  gap: 15px;
+  padding: 15px 25px;
+  justify-content: flex-end;
+}
+
+.filters select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #d0d7e2;
+  background: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  color: #1a1a1a;
+}
+
+.filters select:hover {
+  border-color: #1877f2;
+}
+
+/* === Status Dropdown in Card === */
+.distress-card select {
+  border: none;
+  background: #eef3f9;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.distress-card select:hover {
+  background: #dbe8fc;
+}
+
+/* === Status-Based Card Colors === */
+
+/* Pending - default soft blue border and background */
+.distress-card[data-status="Pending"] {
+  border-top-color: #ff0026;
+  background: #fbced8;
+}
+
+/* Working - yellow-orange theme */
+.distress-card[data-status="Working"] {
+  border-top-color: #f5a623;
+  background: #fff7e6;
+}
+
+/* Closed - green theme */
+.distress-card[data-status="Closed"] {
+  border-top-color: #28a745;
+  background: #e9f9ef;
+}
+
+/* Optional: subtle hover effect that matches status */
+.distress-card[data-status="Pending"]:hover {
+  box-shadow: 0 6px 14px rgba(24, 119, 242, 0.2);
+}
+
+.distress-card[data-status="Working"]:hover {
+  box-shadow: 0 6px 14px rgba(245, 166, 35, 0.2);
+}
+
+.distress-card[data-status="Closed"]:hover {
+  box-shadow: 0 6px 14px rgba(40, 167, 69, 0.2);
+}
