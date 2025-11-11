@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./UserDashboard.css";
 
-// ✅ Helper: Open full path on Google Maps
+// Helper: Open full path on Google Maps
 export const openGoogleMaps = (coordsArray) => {
   if (!coordsArray || coordsArray.length === 0) return;
   const waypoints = coordsArray.join("/");
@@ -19,7 +19,7 @@ const UserDashboard = ({ nodeID: propNodeID, setToken }) => {
   const navigate = useNavigate();
   const nodeID = propNodeID ?? localStorage.getItem("nodeID") ?? "";
 
-  // ✅ Fetch and sort signals
+  // Fetch and sort signals
   useEffect(() => {
     let isMounted = true;
 
@@ -37,7 +37,7 @@ const UserDashboard = ({ nodeID: propNodeID, setToken }) => {
           return { ...sig, coordsArray };
         });
 
-        // ✅ Sort: prioritize current node signals, then recent
+        // Sort: prioritize current node signals, then recent
         const sorted = mapped.sort((a, b) => {
           const aMatch = String(a.nodeID) === String(nodeID);
           const bMatch = String(b.nodeID) === String(nodeID);
@@ -68,7 +68,7 @@ const UserDashboard = ({ nodeID: propNodeID, setToken }) => {
     navigate("/");
   };
 
-  // ✅ Combined filtering (Type + Status)
+  // Combined filtering (Type + Status)
   const filteredSignals = signals.filter((s) => {
     const isMySignal = String(s.nodeID) === String(nodeID);
     const isMultiHop = s.coordsArray.length > 1;
@@ -186,7 +186,7 @@ const UserDashboard = ({ nodeID: propNodeID, setToken }) => {
                   </ul>
                 </div>
 
-                {/* ✅ View full path button */}
+                {/* View full path button */}
                 {coords.length > 1 && (
                   <button
                     className="view-path-btn"
