@@ -1,0 +1,208 @@
+.user-dashboard {
+  background-color: #f9fafc;
+  min-height: 100vh;
+  padding: 30px;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  color: #222;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0d1b2a;
+  color: #fff;
+  padding: 18px 25px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  flex-wrap: wrap; /* allows wrapping for smaller screens */
+  gap: 10px;
+}
+
+.header h2 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+/* Controls container */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap; /* wrap dropdowns/buttons on smaller screens */
+}
+
+.header-controls select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  min-width: 120px;
+}
+
+.header-controls button {
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 16px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.header-controls button:hover {
+  background-color: #d9363e;
+  transform: scale(1.05);
+}
+
+/* Grid */
+.signal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+/* Card */
+.signal-card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.signal-card:hover {
+  transform: translateY(-3px);
+}
+
+.signal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.signal-header h3 {
+  margin: 0;
+  font-size: 17px;
+  color: #0d1b2a;
+}
+
+/* Status badges */
+.status-badge {
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+}
+
+.status-badge.pending {
+  background: #ff7a7a;
+}
+
+.status-badge.working {
+  background: #f0ad4e;
+}
+
+.status-badge.closed {
+  background: #28a745;
+}
+
+/* Signal content */
+.signal-details p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.signal-path {
+  margin-top: 10px;
+}
+
+.signal-path ul {
+  margin: 5px 0 0 18px;
+  padding: 0;
+  list-style-type: disc;
+}
+
+.signal-path a {
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.signal-path a:hover {
+  text-decoration: underline;
+}
+
+.signal-note {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #444;
+  font-style: italic;
+}
+
+.loading,
+.no-data {
+  text-align: center;
+  color: #666;
+  margin-top: 40px;
+  font-size: 18px;
+}
+
+.view-path-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: 0.2s;
+}
+
+.view-path-btn:hover {
+  background-color: #0056b3;
+}
+
+/* =====================
+   RESPONSIVE STYLING
+   ===================== */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header h2 {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  .header-controls {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .header-controls select,
+  .header-controls button {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .header-controls select {
+    font-size: 15px;
+  }
+
+  .signal-grid {
+    grid-template-columns: 1fr;
+  }
+}

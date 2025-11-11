@@ -373,3 +373,44 @@ body {
 .distress-card[data-status="Closed"]:hover {
   box-shadow: 0 6px 14px rgba(40, 167, 69, 0.2);
 }
+
+
+/* user dashboard */
+/* .dashboard {
+  padding: 20px;
+  min-height: 100vh;
+  background-color: #f8fafc;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #2563eb;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.logout-btn {
+  background: white;
+  color: #2563eb;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 600;
+}
+
+.logout-btn:hover {
+  background: #dbeafe;
+}
+
+.distress-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 20px;
+  margin-top: 25px;
+} */
