@@ -34,7 +34,7 @@ const LoginPage = ({ setToken, setRole }) => {
       // Node user login
       const nodeNum = parseInt(nodeID.trim(), 10);
       const minNode = 1;
-      const maxNode = 50;
+      const maxNode = 10;
 
       if (isNaN(nodeNum)) {
         setError("⚠️ Node/User ID must be a number");
@@ -57,7 +57,7 @@ const LoginPage = ({ setToken, setRole }) => {
   return (
     <div className="login-page">
       <div className="login-card">
-        <h2>Emergency Alert Tracker</h2>
+        <h2>LoRa Emergency Signal Tracker</h2>
         <p className="subtitle">Login Portal</p>
 
         <form onSubmit={handleLogin}>
@@ -101,7 +101,7 @@ const LoginPage = ({ setToken, setRole }) => {
               <span className="input-icon">📡</span>
               <input
                 type="text"
-                placeholder="Enter Node/User ID (1-50)"
+                placeholder="Enter Node/User ID"
                 value={nodeID}
                 onChange={(e) => setNodeID(e.target.value)}
                 required

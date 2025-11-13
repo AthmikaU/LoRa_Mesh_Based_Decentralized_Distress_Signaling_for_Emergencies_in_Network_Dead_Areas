@@ -10,58 +10,81 @@ app.use(express.json());
 
 const port = process.env.PORT || 8000;
 
+// === MongoDB Connection ===
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("Database Connected"))
   .catch((error) => console.log("DB Connection Error:", error));
 
-// Schema for distress messages
+// === Schema ===
 const messageSchema = new mongoose.Schema({
   nodeID: { type: Number, required: true },
   seqNo: { type: Number, required: true },
   message: { type: String, required: true },
   coordinates: { type: String, required: true },
-  actionStatus: { 
-    type: String, 
-    enum: ["Pending", "Working", "Closed"], 
-    default: "Pending" 
+  relayedNodes: [
+    {
+      nodeID: { type: Number },
+      coordinates: { type: String }
+    }
+  ],
+  actionStatus: {
+    type: String,
+    enum: ["Pending", "Working", "Closed"],
+    default: "Pending"
   },
-  timestamp: { type: Date, default: Date.now }, // helpful for date filters
-//   timestamp: { type: Date, required: true }
+  timestamp: { type: Date, default: Date.now }
 });
 
 const msgModel = mongoose.model("DistressMessage", messageSchema);
 
-// Add a new distress (default = Pending)
-const processmessages = async (req, res) => {
+// === POST: Add new distress message ===
+const processMessages = async (req, res) => {
   try {
-    const { nodeID, seqNo, message, coordinates, timestamp } = req.body;
+    const { nodeID, seqNo, message, coordinates, relayedNodes, timestamp, actionStatus } = req.body;
 
-    const result = await msgModel.create({
+    // Required fields check
+    if (!nodeID || !seqNo || !message || !coordinates) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    const payload = {
       nodeID,
       seqNo,
       message,
       coordinates,
-      timestamp: timestamp || Date.now() // use provided one or fallback
-    });
+      // Explicitly default to "Pending" if not provided
+      actionStatus: actionStatus || "Pending",
+      timestamp: timestamp ? new Date(timestamp) : Date.now(),
+    };
 
-    res.status(200).json({ msg: "New distress added to DB", result });
+    if (Array.isArray(relayedNodes) && relayedNodes.length > 0) {
+      payload.relayedNodes = relayedNodes;
+    }
+
+    const result = await msgModel.create(payload);
+
+    res.status(201).json({
+      msg: "Distress signal stored successfully",
+      type: relayedNodes?.length ? "Relayed" : "Direct",
+      result
+    });
   } catch (err) {
+    console.error("Error storing distress:", err);
     res.status(500).json({ error: err.message });
   }
 };
 
-
-// Get all messages (sorted by newest first)
-const getmessages = async (req, res) => {
+// === GET: Fetch all messages ===
+const getMessages = async (req, res) => {
   try {
-    const messages = await msgModel.find().sort({ createdAt: -1 });
+    const messages = await msgModel.find().sort({ timestamp: -1 });
     res.status(200).json(messages);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
-// Update distress status (admin action)
+// === PUT: Update distress status ===
 const updateStatus = async (req, res) => {
   try {
     const { id } = req.params;
@@ -77,9 +100,7 @@ const updateStatus = async (req, res) => {
       { new: true }
     );
 
-    if (!updated) {
-      return res.status(404).json({ error: "Distress not found" });
-    }
+    if (!updated) return res.status(404).json({ error: "Distress not found" });
 
     res.status(200).json({ msg: "Status updated successfully", updated });
   } catch (err) {
@@ -87,8 +108,9 @@ const updateStatus = async (req, res) => {
   }
 };
 
-app.post("/senddistress", processmessages);
-app.get("/getdistresses", getmessages);
-app.put("/updateStatus/:id", updateStatus); 
+// === Routes ===
+app.post("/senddistress", processMessages);
+app.get("/getdistresses", getMessages);
+app.put("/updateStatus/:id", updateStatus);
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
