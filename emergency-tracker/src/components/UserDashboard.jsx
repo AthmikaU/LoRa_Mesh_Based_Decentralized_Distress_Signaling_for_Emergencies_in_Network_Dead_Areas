@@ -145,7 +145,7 @@ const UserDashboard = ({ setToken }) => {
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
           >
-            <option value="throughMine">Signals Relayed Through My Device</option>
+            <option value="throughMine">Signals Through or From My Device</option>
             <option value="directMine">Direct from My Device</option>
             <option value="relayedThroughMine">Relayed through My Device</option>
             <option value="all">All Signals</option>
