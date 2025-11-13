@@ -145,15 +145,15 @@ const UserDashboard = ({ setToken }) => {
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
           >
-            <option value="throughMine">Through My Node (Default)</option>
-            <option value="directMine">Direct from My Node</option>
-            <option value="relayedThroughMine">Relayed through My Node</option>
+            <option value="throughMine">Signals Relayed Through My Device</option>
+            <option value="directMine">Direct from My Device</option>
+            <option value="relayedThroughMine">Relayed through My Device</option>
             <option value="all">All Signals</option>
           </select>
         </div>
 
         <div className="filter-group">
-          <label>Status:</label>
+          <label>Action Status:</label>
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
